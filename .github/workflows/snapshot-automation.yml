@@ -1,5 +1,5 @@
 name: Snapshot Release Automation
-on:
+# on:
   schedule: # schedule the job to run at 12 a.m. daily
     - cron: "0 0 * * *"
 
