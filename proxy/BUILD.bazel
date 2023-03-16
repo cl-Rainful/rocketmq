@@ -50,6 +50,7 @@ java_library(
         "@maven//:io_opentelemetry_opentelemetry_api",
         "@maven//:io_opentelemetry_opentelemetry_exporter_otlp",
         "@maven//:io_opentelemetry_opentelemetry_exporter_prometheus",
+        "@maven//:io_opentelemetry_opentelemetry_exporter_logging",
         "@maven//:io_opentelemetry_opentelemetry_sdk",
         "@maven//:io_opentelemetry_opentelemetry_sdk_common",
         "@maven//:io_opentelemetry_opentelemetry_sdk_metrics",
@@ -74,6 +75,7 @@ java_library(
     ],
     visibility = ["//visibility:public"],
     deps = [
+	"//acl",
         ":proxy",
         "//:test_deps",
         "//broker",
@@ -99,6 +101,7 @@ java_library(
         "@maven//:org_checkerframework_checker_qual",
         "@maven//:org_slf4j_slf4j_api",
         "@maven//:org_springframework_spring_core",
+	"@maven//:org_jetbrains_annotations",
     ],
 )
 
