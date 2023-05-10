@@ -39,7 +39,7 @@ public class BrokerReplicasInfo extends RemotingSerializable  {
     }
 
     public void setReplicasInfoTable(
-        Map<String, ReplicasInfo> replicasInfoTable) {
+            Map<String, ReplicasInfo> replicasInfoTable) {
         this.replicasInfoTable = replicasInfoTable;
     }
 
@@ -54,8 +54,7 @@ public class BrokerReplicasInfo extends RemotingSerializable  {
         private List<ReplicaIdentity> notInSyncReplicas;
 
         public ReplicasInfo(Long masterBrokerId, String masterAddress, int masterEpoch, int syncStateSetEpoch,
-            List<ReplicaIdentity> inSyncReplicas,
-            List<ReplicaIdentity> notInSyncReplicas) {
+                            List<ReplicaIdentity> inSyncReplicas, List<ReplicaIdentity> notInSyncReplicas) {
             this.masterBrokerId = masterBrokerId;
             this.masterAddress = masterAddress;
             this.masterEpoch = masterEpoch;
@@ -93,7 +92,7 @@ public class BrokerReplicasInfo extends RemotingSerializable  {
         }
 
         public void setInSyncReplicas(
-            List<ReplicaIdentity> inSyncReplicas) {
+                List<ReplicaIdentity> inSyncReplicas) {
             this.inSyncReplicas = inSyncReplicas;
         }
 
@@ -102,7 +101,7 @@ public class BrokerReplicasInfo extends RemotingSerializable  {
         }
 
         public void setNotInSyncReplicas(
-            List<ReplicaIdentity> notInSyncReplicas) {
+                List<ReplicaIdentity> notInSyncReplicas) {
             this.notInSyncReplicas = notInSyncReplicas;
         }
 
@@ -125,7 +124,6 @@ public class BrokerReplicasInfo extends RemotingSerializable  {
         public boolean isExistInAllReplicas(String brokerName, Long brokerId, String brokerAddress) {
             return this.isExistInSync(brokerName, brokerId, brokerAddress) || this.isExistInNotSync(brokerName, brokerId, brokerAddress);
         }
-
     }
 
     public static class ReplicaIdentity extends RemotingSerializable {
@@ -133,11 +131,20 @@ public class BrokerReplicasInfo extends RemotingSerializable  {
         private Long brokerId;
 
         private String brokerAddress;
+        private Boolean alive;
 
         public ReplicaIdentity(String brokerName, Long brokerId, String brokerAddress) {
             this.brokerName = brokerName;
             this.brokerId = brokerId;
             this.brokerAddress = brokerAddress;
+            this.alive = false;
+        }
+
+        public ReplicaIdentity(String brokerName, Long brokerId, String brokerAddress, Boolean alive) {
+            this.brokerName = brokerName;
+            this.brokerId = brokerId;
+            this.brokerAddress = brokerAddress;
+            this.alive = alive;
         }
 
         public String getBrokerName() {
@@ -164,12 +171,21 @@ public class BrokerReplicasInfo extends RemotingSerializable  {
             this.brokerId = brokerId;
         }
 
+        public Boolean getAlive() {
+            return alive;
+        }
+
+        public void setAlive(Boolean alive) {
+            this.alive = alive;
+        }
+
         @Override
         public String toString() {
             return "ReplicaIdentity{" +
                     "brokerName='" + brokerName + '\'' +
                     ", brokerId=" + brokerId +
                     ", brokerAddress='" + brokerAddress + '\'' +
+                    ", alive=" + alive +
                     '}';
         }
 
